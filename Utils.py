@@ -5,6 +5,7 @@
 
 import numpy as np
 import pandas as pd
+import pickle
 
 
 # In[4]:
@@ -77,7 +78,7 @@ def y2indicator(y):
 
 # In[ ]:
 
-def getData(balance_ones=True):
+def getData(balance_ones=False):
     # images are 48x48 = 2304 size vectors
     # N = 35887
     Y = []
@@ -107,9 +108,12 @@ def getData(balance_ones=True):
 # In[29]:
 
 def getImageData():
-    X,Y=getData()
-    N,D=X.shape
-    d=int(np.sqrt(D))
+    X = np.array(pickle.load(open('resized_grey_face.p','rb')))
+    Y = np.array(pickle.load(open('resized_grey_face_id.p','rb')))
+    
+    N=X.shape[0]
+    d=100
+    #d=int(np.sqrt(D))
     X=X.reshape(N,1,d,d)
     return X,Y
 
